@@ -1,0 +1,8 @@
+# To create virtual eviroment
+python -m venv venv
+
+# To activate virtual eviroment
+.venv/bin/activate
+
+# To deactivate virtual eviroment
+deactivate
