@@ -8,9 +8,12 @@ python -m venv venv
 deactivate
 
 # To create django project
-django-admin startproject main
+django-admin startproject [main]
 
 # To run application
 python manage.py runserver
     # To run application with other port
-    - python manage.py runserver 4000
+    - python manage.py runserver [4000]
+
+# To create django application (part of web-application)
+# python manage.py startapp [news]
