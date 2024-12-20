@@ -1,3 +1,8 @@
+Django used MVC / MTV => architecture pattern
+MVC = Model View Controller
+MTV = Model Template View
+---------------------------
+
 # To create virtual eviroment
 python -m venv venv
 
