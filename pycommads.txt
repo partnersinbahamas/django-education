@@ -6,3 +6,11 @@ python -m venv venv
 
 # To deactivate virtual eviroment
 deactivate
+
+# To create django project
+django-admin startproject main
+
+# To run application
+python manage.py runserver
+    # To run application with other port
+    - python manage.py runserver 4000
