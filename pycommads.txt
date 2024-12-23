@@ -7,7 +7,7 @@ MTV = Model Template View
 python -m venv venv
 
 # To activate virtual eviroment
-.venv/bin/activate
+source .venv/bin/activate
 
 # To deactivate virtual eviroment
 deactivate
@@ -22,3 +22,11 @@ python manage.py runserver
 
 # To create django application (part of web-application)
 # python manage.py startapp [news]
+
+# Responsible for preparing changes to database models and creating migration files
+python manage.py makemigrations
+    # To check SQL request to database
+    - python manage.py sqlmigrate [news] [0001]
+
+# To run all magration files
+python manage.py migrate
