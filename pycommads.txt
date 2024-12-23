@@ -30,3 +30,10 @@ python manage.py makemigrations
 
 # To run all magration files
 python manage.py migrate
+
+# To open Django Interactive Console
+python manage.py shell
+    # To assign last call
+    - varName = _
+    # To save model in database
+    - varName.save()
