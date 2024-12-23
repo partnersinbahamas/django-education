@@ -20,9 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# IMPORTANT: do not show this key to anyone
 SECRET_KEY = 'django-insecure-t2sovjux7suy6_!vlw+828%*6x^um0i#kae6z#lg%#o%0gja-j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Will allow to show error reports on your web application
+# Needed only in development stage
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -122,3 +125,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# path to load uploaded media files
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# to buid url to media folder
+MEDIA_URL = '/media/'
