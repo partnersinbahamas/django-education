@@ -1,6 +1,8 @@
 Django used MVC / MTV => architecture pattern
 MVC = Model View Controller
 MTV = Model Template View
+
+CRUD = Create Read Update Delete
 ---------------------------
 
 # To create virtual eviroment
@@ -22,7 +24,7 @@ python manage.py runserver
 
 # To create django application (part of web-application)
 # python manage.py startapp [news]
-
+ 
 # Responsible for preparing changes to database models and creating migration files
 python manage.py makemigrations
     # To check SQL request to database
@@ -37,3 +39,15 @@ python manage.py shell
     - varName = _
     # To save model in database
     - varName.save()
+    # To read all Articles
+    - Article.objects.all()
+    # To filter models by [title]
+    - Article.objects.filter(title="")
+    # To get model with id / pk
+    - Article.objects.get(pk="")
+    # To sort models by title / -titile
+    - Article.objects.order_by('-title' / 'title')
+    # To take all models without model which has title = "Some Title"
+    - Article.objects.exlude(title="Some Title")
+    # To delete model from database
+    [model].delete()
