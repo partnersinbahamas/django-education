@@ -51,3 +51,6 @@ python manage.py shell
     - Article.objects.exlude(title="Some Title")
     # To delete model from database
     [model].delete()
+
+# To create django admin user
+python manage.py createsuperuser
