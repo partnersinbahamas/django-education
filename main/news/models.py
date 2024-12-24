@@ -12,13 +12,13 @@ class Article(models.Model):
     content = models.TextField('Content', blank=True) # blank means, is this field required
 
     # auto_now_add: save the date only one time at the creation
-    created_at = models.DateTimeField('Creation date', auto_now_add=True)
+    created_at = models.DateTimeField('Created', auto_now_add=True)
 
     # auto_now: save the date each time when we updating the Article
-    updated_at = models.DateTimeField('Updating date', auto_now=True)
+    updated_at = models.DateTimeField('Updated', auto_now=True)
 
     # upload_to: path to folder where we save our images
-    image = models.ImageField('Image', upload_to='images/%Y/%m/%d/')
+    image = models.ImageField('Image', upload_to='images/%Y/%m/%d/', blank=True)
     is_published = models.BooleanField('Published', default=True)
 
     """
@@ -33,3 +33,5 @@ class Article(models.Model):
         # to see rigth names in admin
         verbose_name='Article'
         verbose_name_plural='Articles'
+        # to sort element by in admin
+        ordering = ['-created_at']
