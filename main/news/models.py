@@ -22,6 +22,34 @@ class Article(models.Model):
     is_published = models.BooleanField('Published', default=True)
 
     """
+    models.ForeignKey is used to create a relationship between models,
+    specifically to define a "one-to-many" relationship.
+    This allows one record in one table (model) to be associated with multiple records in another table.
+
+    Attrs:
+        - to (first argument): Specifies the model to which the relationship is established. In the example above, it's Category.
+        - on_delete: Determines what happens to the related records if the parent record is deleted.
+            - models.CASCADE: Deletes related records.
+            - models.PROTECT: Prevents deletion and raises an error.
+            - models.SET_NULL: Sets the field to NULL.
+            - models.SET_DEFAULT: Sets a default value.
+            - models.SET(...): Sets a custom value or function.
+            - models.DO_NOTHING: Does nothing.
+        - related_name (optional): Specifies the name for the reverse relationship from the related model.
+        - null (optional): determines whether this field can store a NULL value in the database, meaning whether it can be empty.
+
+    to create relations ships you can use:
+        - ForeignKey
+        - ManyToManyField
+    """
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.PROTECT,
+        related_name="categories",
+        null=True,
+    )
+
+    """
     __str__
     used to provide a string representation of a model object
     and when displaying model objects in the Django admin panel
@@ -35,3 +63,15 @@ class Article(models.Model):
         verbose_name_plural='Articles'
         # to sort element by in admin
         ordering = ['-created_at']
+
+class Category(models.Model):
+    # db_index set uniq index to the field
+    name = models.CharField('Category name', max_length=50, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name='Category'
+        verbose_name_plural='Categories'
+        ordering=['pk']
