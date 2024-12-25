@@ -11,5 +11,5 @@ def index(request):
     data = {
       'news': news,
     }
-    return render(request, 'news/index.html', data)
+    return render(request, 'news/news.html', data)
 

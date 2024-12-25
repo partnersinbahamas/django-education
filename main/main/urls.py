@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 # include meand that we control paths for main app from main.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('news.urls'))
+    path('', include('home.urls')),
+    path('news/', include('news.urls'))
 ]
 
 # uses only in development stage, django will build the path, and give us the media files
