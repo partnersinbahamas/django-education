@@ -28,6 +28,48 @@
     - spaceless - remove spaces/tabs between html tags
 -->
 
+<!-- 
+    Filters:
+    - add to add something to value
+        4|add:'2' = 4 + 2
+    - count return length of list
+        news.count
+    - center make string length 15
+        'Django'|center:'15' = '     Django    '
+    - cut to remove some characters from string
+        'its string':cur:" " = itsstring
+    - default adds default values is origin value does not exist
+        False|default:'Nothing'
+    - default_if_none adds default values is origin value is None
+        None|default:'Nothing'
+    - dictsort - sort dictionaries
+    - divisibleby = return True if value can be divide on
+        21|divisibleby:'3' = True
+    - escape
+    - escapejs
+    - filesizeformat return file size
+    - first returns first element of list
+        ['a', 'b', 'c']|first return 'a'
+    - last
+    - floatformat
+    - length_is return True if value has length
+        'String'|length_is:'6' = True
+    - linebreaks wrapp the string to a <p> tag, and replace the \n with <br /> tag
+    - linebreaksbr replace the \n with <br /> tag
+    - make_list make a values to a list 'Joel' => ['J', 'o', 'e', 'l']
+    - random returns random element from a list
+    - slugify returns a string separated by '-'
+        'test str' = 'test-str'
+    - timesince retunrns how much time left
+    - timeuntil retunrns how much time till
+    - truncatechars slice the word
+        - 'Some word wroted'|truncatechars:'7' = 'Some...'
+
+
+
+
+ -->
+
 {% block main %}
 <div class="container m-0-a mt-2">
   <h1>News</h1>
@@ -39,10 +81,20 @@
             <div class="card-header">
               Article: {{ article.category }}
             </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ article.title }}</h5>
-              <p class="card-text">{{ article.content }}.</p>
-              <a href="#" class="btn btn-primary">Read more</a>
+            <div class="card-body flex">
+                <div class="media d-flex flex-row">
+                    <img src="{% if article.image %}{{ article.image.url }}{% else %}https://picsum.photos/id/870/450/300?grayscale&blur=2{% endif %}"
+                      alt="Article image"
+                      width="450"
+                      height="300"
+                      class="me-3"
+                    >
+                    <div class="media-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.content|truncatewords:50 }}.</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 {{ article.created_at|date:"Y.m.d H:i" }}
