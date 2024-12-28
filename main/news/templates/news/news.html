@@ -1,70 +1,8 @@
-{% extends 'home/index.html' %}
+{% extends 'base.html' %}
 
-<!--
-    Tags:
-    - autoescape on / off - is a setting used in various templating engines (e.g., Django or Jinja2) that controls the automatic escaping of output to prevent attacks like XSS (Cross-Site Scripting).
-        if you have html code in save text in database, you will see <h1>Text</h1> like a text instead of html tag,
-        with autoescape you off this behavior, and you will see real html tag.
-
-    - csrf_token it is a security mechanism used to protect web applications.
-    - cycle tag is a built-in template tag that allows you to alternate between values during a loop iteration.
-      cycle 'blue' 'red'
-    - filter to add filters for block
-    - firstof var1 var2 var3 - show first variable which is not False
-    - for to make a loop
-        * forloop.counter = The current iteration of the loop (1-indexed)
-        * forloop.counter0 = The current iteration of the loop (0-indexed)
-        * forloop.revcounter = The number of iterations from the end of the loop (1-indexed)
-        * forloop.revcounter0 = The number of iterations from the end of the loop (0-indexed)
-        * forloop.first = True if this is the first time through the loop
-        * forloop.last = True if this is the last time through the loop
-        * forloop.parentloop = For nested loops, this is the loop surrounding the current one
-        * reversed = revers the loop
-    - for empy - loop with "empty" tag, with showed if variable does not exist
-    - lorem [count] [method] [random] tag uses to generate text
-    - ifchanged Check if a value has changed from the last iteration of a loop.
-    - now to show current date
-        now "jS F Y H:i"
-    - spaceless - remove spaces/tabs between html tags
--->
-
-<!-- 
-    Filters:
-    - add to add something to value
-        4|add:'2' = 4 + 2
-    - count return length of list
-        news.count
-    - center make string length 15
-        'Django'|center:'15' = '     Django    '
-    - cut to remove some characters from string
-        'its string':cur:" " = itsstring
-    - default adds default values is origin value does not exist
-        False|default:'Nothing'
-    - default_if_none adds default values is origin value is None
-        None|default:'Nothing'
-    - dictsort - sort dictionaries
-    - divisibleby = return True if value can be divide on
-        21|divisibleby:'3' = True
-    - escape
-    - escapejs
-    - filesizeformat return file size
-    - first returns first element of list
-        ['a', 'b', 'c']|first return 'a'
-    - last
-    - floatformat
-    - length_is return True if value has length
-        'String'|length_is:'6' = True
-    - linebreaks wrapp the string to a <p> tag, and replace the \n with <br /> tag
-    - linebreaksbr replace the \n with <br /> tag
-    - make_list make a values to a list 'Joel' => ['J', 'o', 'e', 'l']
-    - random returns random element from a list
-    - slugify returns a string separated by '-'
-        'test str' = 'test-str'
-    - timesince retunrns how much time left
-    - timeuntil retunrns how much time till
-    - truncatechars slice the word
-        - 'Some word wroted'|truncatechars:'7' = 'Some...'
- -->
+{% block title %}
+News articles
+{% endblock %}
 
 {% block main %}
 <div class="container m-0-a mt-2">
@@ -72,7 +10,7 @@
 
   <div class="row">
     <div class="col-md-3">
-        {% include 'news/categories.html' %}
+        {% include 'inc/_categories.html' %}
     </div>
     <div class="col-md-9 mb-2">
       {% for article in news %}
