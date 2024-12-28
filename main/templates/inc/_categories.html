@@ -1,4 +1,7 @@
+{% load news_tags %}
 <div class="list-group">
+    <!-- using django simple tags -->
+    {% get_all_categories as categories %}
     {% for category in categories %}
         <a
           href="{% url 'category' category.pk %}"
