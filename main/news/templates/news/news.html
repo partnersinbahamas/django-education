@@ -64,10 +64,6 @@
     - timeuntil retunrns how much time till
     - truncatechars slice the word
         - 'Some word wroted'|truncatechars:'7' = 'Some...'
-
-
-
-
  -->
 
 {% block main %}
@@ -75,8 +71,11 @@
   <h1>News</h1>
 
   <div class="row">
-    {% for article in news %}
-      <div class="col-md-12 mb-2">
+    <div class="col-md-4">
+        {% include 'news/categories.html' %}
+    </div>
+    <div class="col-md-8 mb-2">
+      {% for article in news %}
         <div class="card">
             <div class="card-header">
               Article: {{ article.category }}
@@ -100,8 +99,8 @@
                 {{ article.created_at|date:"Y.m.d H:i" }}
             </div>
           </div>
-      </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
