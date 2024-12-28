@@ -1,8 +1,5 @@
-{% load news_tags %}
-Simple Tag
+
 <div class="list-group">
-    <!-- using django simple tags -->
-    {% get_all_categories as categories %}
     {% for category in categories %}
         <a
           href="{% url 'category' category.pk %}"
@@ -12,7 +9,3 @@ Simple Tag
         </a>
     {% endfor %}
 </div>
-
-Inclusion Tag
-<!-- using inclusion tag -->
-{% show_all_categories selected_category %}
