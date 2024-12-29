@@ -70,6 +70,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    # get_absolute_url needs to redirect user after Article update, create in form
+    # method is used to provide the absolute URL of an object.
+    # It’s often defined in models to specify the path to a page associated with a particular instance of the model.
+    def get_absolute_url(self):
+        # args: path name from urls, args2 "id from urls": self.pk
+        return reverse_lazy('category', kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name='Category'
