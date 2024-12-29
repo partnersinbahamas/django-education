@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Article
-from .templatetags.news_tags import get_all_categories
+from .templatetags.news_tags import get_all_categories, get_article_by_id
 
 # Create your views here.
 def index(request):
@@ -26,4 +26,13 @@ def by_category(request, pk):
     }
 
     return render(request, 'news/news.html', data)
+
+def view_article(request, article_id):
+    article = get_article_by_id(article_id)
+
+    data = {
+        'article': article
+    }
+
+    return render(request, 'news/article.html', data)
 

@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-News articles
+    {{ article.title }}
 {% endblock %}
 
 {% block main %}
 <div class="container m-0-a mt-2">
-  <h1>News</h1>
+  <h1>Article</h1>
 
   <div class="row">
     <div class="col-md-3">
         {% include 'inc/_categories.html' %}
     </div>
     <div class="col-md-9 mb-2">
-      {% for article in news %}
         <div class="card">
             <div class="card-header">
               Article: {{ article.category }}
@@ -28,8 +27,8 @@ News articles
                     >
                     <div class="media-body">
                         <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text">{{ article.content|truncatewords:50 }}.</p>
-                        <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read more</a>
+                        <p class="card-text">{{ article.content }}.</p>
+                        <a href="{% url 'news' %}" class="btn btn-danger">Read less</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +36,6 @@ News articles
                 {{ article.created_at|date:"Y.m.d H:i" }}
             </div>
           </div>
-        {% endfor %}
     </div>
   </div>
 </div>

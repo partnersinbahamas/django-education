@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 # Create your table models for Data Base here.
 
@@ -57,6 +58,9 @@ class Article(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse_lazy('view_article', kwargs={'article_id': self.pk})
+        
     class Meta:
         # to see rigth names in admin
         verbose_name='Article'
