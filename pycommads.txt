@@ -54,3 +54,7 @@ python manage.py shell
 
 # To create django admin user
 python manage.py createsuperuser
+
+
+# To compile and collect all django static files
+python manage.py collectstatic
