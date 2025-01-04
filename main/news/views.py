@@ -46,8 +46,11 @@ def add_article(request):
             # in form.cleaned_data saves all fields which passed the validation
             # form.cleaned_data
 
+            # if out model isnt binded with model we need to save it manualy
+            # article = Article.objects.create(**form.cleaned_data)
+            
             # we can use form.save() if our form binded with model used with ModelForm
-            article = Article.objects.create(**form.cleaned_data)
+            article = form.save()
             return redirect(article.get_absolute_url())
     else:
         form = ArticleForm()

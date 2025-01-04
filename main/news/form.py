@@ -1,7 +1,38 @@
 from django import forms
-from .models import Category
+from .models import Article
 
+# This form conntected with Model (Article) and we can use then save() func
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        # here we bind form with model
+        model = Article
+
+        # we can use as well fields ='__all__', it took all fields from model
+        fields = ['title', 'content', 'is_published', 'image', 'category']
+
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'type': 'file',
+            }),
+            'is_published': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+        }
+
+
+# Alternative example to render a form with widgets
 # This form isnt connected with Article model
+"""
 class ArticleForm(forms.Form):
     title = forms.CharField(
         label='Title',
@@ -28,32 +59,4 @@ class ArticleForm(forms.Form):
         empty_label="Select category",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-
-    # Alternative example to render a form with widgets
-    # This form conntected with Model (Article) and we can use then save() func
-    """
-    class ArticleForm(ModelForm):
-    class Meta:
-        model = Article
-        fields = ['title', 'desctiption', 'text', 'date']
-
-        widgets = {
-            'title': TextInput(attrs={
-                'class': 'form_item form-control',
-                'placeholder': 'Name',
-            }),
-            'desctiption': TextInput(attrs={
-                'class': 'form_item form-control',
-                'placeholder': 'Desctiption',
-            }),
-            'text': Textarea(attrs={
-                'class': 'form_item form-control',
-                'placeholder': 'State',
-            }),
-            'date': DateTimeInput(attrs={
-                'class': 'form_item form-control',
-                'placeholder': 'Date',
-                'type': 'date'
-            }),
-        }
-    """
+"""
