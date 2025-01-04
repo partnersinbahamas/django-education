@@ -11,6 +11,9 @@ News articles
   <div class="row">
     <div class="col-md-3">
         {% include 'inc/_categories.html' %}
+        <button class="btn btn-primary mt-3">
+          <a href="{% url 'add_article' %}" class="add_article">New article +</a>
+        </button>
     </div>
     <div class="col-md-9 mb-2">
       {% for article in news %}

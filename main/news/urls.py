@@ -1,11 +1,12 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, by_category, view_article
+from .views import index, by_category, view_article, add_article
 
 urlpatterns = [
     path('', index, name="news"),
     # <int:pk> means that we will have dynamic link param
     path('category/<int:pk>', by_category, name="category"),
-    path('news/<int:article_id>', view_article, name="view_article")
+    path('news/<int:article_id>', view_article, name="view_article"),
+    path('news/add-article', add_article, name="add_article")
 ]

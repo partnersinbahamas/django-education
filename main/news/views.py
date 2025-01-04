@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Article
 from .templatetags.news_tags import get_all_categories, get_article_by_id
+from .form import ArticleForm
 
 # Create your views here.
 def index(request):
@@ -35,4 +36,16 @@ def view_article(request, article_id):
     }
 
     return render(request, 'news/article.html', data)
+
+def add_article(request):
+    if request.method == 'POST':
+        pass
+    else:
+        form = ArticleForm()
+
+    data = {
+        'form': form,
+    }
+
+    return render(request, 'news/add_article.html', data)
 
