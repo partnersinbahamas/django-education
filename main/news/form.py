@@ -1,5 +1,8 @@
 from django import forms
 from .models import Article
+# regular expration
+import re
+from django.core.exceptions import ValidationError
 
 # This form conntected with Model (Article) and we can use then save() func
 class ArticleForm(forms.ModelForm):
@@ -28,6 +31,18 @@ class ArticleForm(forms.ModelForm):
                 'class': 'form-control',
             }),
         }
+    
+    """
+    this is a custom validator for title field
+    custom validator needs to start with clean_[fieldName]
+    """
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+
+        if re.match(r'\d', title):
+            raise ValidationError("Title can not start with number(s)")
+        else:
+            return title
 
 
 # Alternative example to render a form with widgets
