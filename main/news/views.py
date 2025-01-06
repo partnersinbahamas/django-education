@@ -1,16 +1,51 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from .models import Article
 from .templatetags.news_tags import get_all_categories, get_article_by_id
 from .form import ArticleForm
+from django.views.generic import ListView
 
 # Create your views here.
-def index(request):
-    news = Article.objects.order_by('-created_at')
 
-    data = {
-      'news': news,
-    }
-    return render(request, 'news/news.html', data)
+# def index(request):
+#     news = Article.objects.order_by('-created_at')
+
+#     data = {
+#       'news': news,
+#     }
+#     return render(request, 'news/news.html', data)
+
+# same logic implemantation as def index() but with OOP
+class HomeNewsList(ListView):
+    """
+    this will take all Article from Article model
+    same as Article.objects.all()
+    """
+
+    model = Article
+    # our template name, default is [app_name]_list.html: news_list.html
+    template_name = 'news/news.html'
+    # a variable name which we use on template: defautl is object_list
+    context_object_name = 'news'
+    
+    """
+    if we need to add some extra variables to template
+    we can use extra_context dict, but only if is static data
+    extra_context = {'page_name': 'page'}
+    """
+    # 
+    """
+    if our extra data is dinamic, use get_context_data func
+    """
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_name'] = 'page'
+        return context
+    
+    # used to retrieve a set of data that will be passed to the template or used for further processing
+    def get_queryset(self):
+        return Article.objects.filter(is_published=True)
 
 
 def by_category(request, pk):
