@@ -15,7 +15,10 @@ Add article
         </div>
         <div class="col-md-9 mb-2">
             <div class="news_form">
-                <form action="{% url 'add_article' %}" method="post" class="add_form">
+                <!-- 
+                    add enctype="multipart/form-data" to upload files to the server
+                 -->
+                <form action="{% url 'add_article' %}" method="post" class="add_form" enctype="multipart/form-data">
                     <!-- 
                         you can use also: form.as_p
                         this will render each form input in <p> tag

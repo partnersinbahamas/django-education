@@ -40,7 +40,7 @@ def view_article(request, article_id):
 def add_article(request):
     if request.method == 'POST':
 
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
 
         if form.is_valid():
             # in form.cleaned_data saves all fields which passed the validation
