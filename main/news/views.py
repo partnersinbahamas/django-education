@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from .models import Article
-from .templatetags.news_tags import get_all_categories, get_article_by_id
+from .templatetags.news_tags import get_all_categories, get_article_by_id, get_category_published_articles
 from .form import ArticleForm
 from django.views.generic import ListView
 
@@ -15,6 +15,7 @@ from django.views.generic import ListView
 #       'news': news,
 #     }
 #     return render(request, 'news/news.html', data)
+# ----------
 
 # same logic implemantation as def index() but with OOP
 class HomeNewsList(ListView):
@@ -48,20 +49,45 @@ class HomeNewsList(ListView):
         return Article.objects.filter(is_published=True)
 
 
-def by_category(request, pk):
-    # pk came from url category/<int:pk> in urls
-    news = Article.objects.filter(category_id=pk)
-    # using simple tag
-    categories = get_all_categories()
-    selected_category = categories.get(id=pk)
+# def by_category(request, pk):
+#     # pk came from url category/<int:pk> in urls
+#     news = Article.objects.filter(category_id=pk)
+#     # using simple tag
+#     categories = get_all_categories()
+#     selected_category = categories.get(id=pk)
 
-    data = {
-        'news': news,
-        'categories': categories,
-        'selected_category': selected_category,
-    }
+#     data = {
+#         'news': news,
+#         'categories': categories,
+#         'selected_category': selected_category,
+#     }
 
-    return render(request, 'news/news.html', data)
+#     return render(request, 'news/news.html', data)
+# ----------
+# same logic implemantation as def by_category() but with OOP
+class NewsByCategory(ListView):
+    model = Article
+    template_name = 'news/news.html'
+    context_object_name = 'news'
+    # """
+    # do not allow to show empty list
+    # if category id will not found, is raise PageNotFound
+    # """
+    # allow_empty = False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = get_all_categories()
+        # we take our pk from urls path using self.kwargs
+        selected_category = categories.get(id=self.kwargs['pk'])
+
+        context['categories'] = categories
+        context['selected_category'] = selected_category
+
+        return context
+    
+    def get_queryset(self):
+        return get_category_published_articles(category_id=self.kwargs['pk'])
 
 def view_article(request, article_id):
     article = get_article_by_id(article_id)
