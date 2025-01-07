@@ -2,9 +2,9 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from .models import Article
-from .templatetags.news_tags import get_all_categories, get_article_by_id, get_category_published_articles
+from .templatetags.news_tags import get_all_categories, get_category_published_articles
 from .form import ArticleForm
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
@@ -89,14 +89,32 @@ class NewsByCategory(ListView):
     def get_queryset(self):
         return get_category_published_articles(category_id=self.kwargs['pk'])
 
-def view_article(request, article_id):
-    article = get_article_by_id(article_id)
+# def view_article(request, article_id):
+#     article = get_article_by_id(article_id)
 
-    data = {
-        'article': article
-    }
+#     data = {
+#         'article': article
+#     }
 
-    return render(request, 'news/article.html', data)
+#     return render(request, 'news/article.html', data)
+    
+# same logic implemantation as def view_article() but with OOP
+class ArticleView(DetailView):
+    model = Article
+    """
+      by default django search pk from Article
+      but in urls we use article_id
+      thats why we need to change the pk from urls to article_id
+    """
+    pk_url_kwarg = 'article_id'
+    template_name = 'news/article.html'
+    context_object_name = 'article'
+
+    # here we can also use 
+    """
+      def get_context_data(self, **kwargs: Any):
+      def get_queryset(self):
+    """
 
 def add_article(request):
     if request.method == 'POST':
