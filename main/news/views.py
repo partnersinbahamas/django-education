@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Article
 from .templatetags.news_tags import get_all_categories, get_category_published_articles
 from .form import ArticleForm
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 
@@ -116,27 +116,45 @@ class ArticleView(DetailView):
       def get_queryset(self):
     """
 
-def add_article(request):
-    if request.method == 'POST':
+# def add_article(request):
+#     if request.method == 'POST':
 
-        form = ArticleForm(request.POST, request.FILES)
+#         form = ArticleForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            # in form.cleaned_data saves all fields which passed the validation
-            # form.cleaned_data
+#         if form.is_valid():
+#             # in form.cleaned_data saves all fields which passed the validation
+#             # form.cleaned_data
 
-            # if out model isnt binded with model we need to save it manualy
-            # article = Article.objects.create(**form.cleaned_data)
+#             # if out model isnt binded with model we need to save it manualy
+#             # article = Article.objects.create(**form.cleaned_data)
             
-            # we can use form.save() if our form binded with model used with ModelForm
-            article = form.save()
-            return redirect(article.get_absolute_url())
-    else:
-        form = ArticleForm()
+#             # we can use form.save() if our form binded with model used with ModelForm
+#             article = form.save()
+#             return redirect(article.get_absolute_url())
+#     else:
+#         form = ArticleForm()
 
-    data = {
-        'form': form,
-    }
+#     data = {
+#         'form': form,
+#     }
 
-    return render(request, 'news/add_article.html', data)
+#     return render(request, 'news/add_article.html', data)
+    
+# same logic implemantation as def add_article() but with OOP
+class CreateArticle(CreateView):
+    # we need to bind our form with view using form_class
+    # as model = Article in ListView, ...
+    form_class = ArticleForm
+    template_name = 'news/add_article.html'
 
+    """
+      if we didnt defin a get_absolute_url func
+      we can redirect to after creation using:
+      success_url = reverse_lazy('view_article')
+    """
+
+    # here we can also use 
+    """
+      def get_context_data(self, **kwargs: Any):
+      def get_queryset(self):
+    """
