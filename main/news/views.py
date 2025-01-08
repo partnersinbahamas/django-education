@@ -6,6 +6,8 @@ from .templatetags.news_tags import get_all_categories, get_category_published_a
 from .form import ArticleForm
 from django.views.generic import ListView, DetailView, CreateView
 
+# ORM
+
 # Create your views here.
 
 # def index(request):
