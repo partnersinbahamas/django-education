@@ -1,0 +1,22 @@
+ORM => Object Related Model
+
+we use it to get data from database
+
+exmaple model = Article
+
+!Article.objects.
+  - all() = to take all data model
+  - order_by('title') = to take data sorted/ordered by title
+  - reverse() = to reverse the original data
+  - get(pk=1) to take object with has id/pk equal 1
+
+    if we have:
+        - primary model: Category
+        - secondary model/related model: Article
+    we can get all Article models related with Category:
+      - category = Category.objects.get(pk=1)
+      - category.article_set.all()
+
+      or use it with related_name var which you add to the category = models.ForeignKey()
+        - category.[related_name].all()
+
