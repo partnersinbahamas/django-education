@@ -20,3 +20,20 @@ exmaple model = Article
       or use it with related_name var which you add to the category = models.ForeignKey()
         - category.[related_name].all()
 
+  with filters:
+    to use some filters/lookups you need to write [fieldName]__[filter]
+    read more at https://docs.djangoproject.com/en/5.1/ref/models/querysets/#field-lookups
+    - gt = Greater than
+      * id__gt=4 = (gt = Greeter than) id which more than 4
+    - gte = Greater than or equal to
+      * id__gt=4 = (gt = Greeter than) id which more or equal 4
+    - lt = less than
+    - lte = less than or equal to
+    - startswith = return objects with startswith (title)
+    - contains = return (title) with container (some string) with register
+    - icontains = return (title) with container (some string) w/0 register
+    - in=(1, 5, 6) = return if (id) return all objects if the pk maths with the values in a list
+    - range=(1, 10) = return all elements from (pk) 1 to 10
+    - exact=5 return objects with (id) 5
+    - iexact = with register
+
