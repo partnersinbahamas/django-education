@@ -33,7 +33,19 @@ exmaple model = Article
     - contains = return (title) with container (some string) with register
     - icontains = return (title) with container (some string) w/0 register
     - in=(1, 5, 6) = return if (id) return all objects if the pk maths with the values in a list
+      * in param we can also use a Querysets as:
+        - categories = Category.objects.filter(pk__in=[1,2])
+        - articles = Article.objects.filter(category__in=cats)
     - range=(1, 10) = return all elements from (pk) 1 to 10
     - exact=5 return objects with (id) 5
     - iexact = with register
+    - first = to get first element from a model list
+    - last = to get last element from a model list
+    - earliest = return most eary element by datetime field
+    - latest = return most late element by datetime field
+    - exists = return if some value exists
+    - count = return length of
+    - get_previous_by_[datetime field] = return prev object
+    - get_next_by_[datetime field] = return next object
+
 
