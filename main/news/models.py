@@ -49,6 +49,7 @@ class Article(models.Model):
         related_name="categories",
         null=True,
     )
+    views = models.IntegerField(default=0)
 
     """
     __str__
