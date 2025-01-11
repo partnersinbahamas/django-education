@@ -20,6 +20,9 @@ exmaple model = Article
       or use it with related_name var which you add to the category = models.ForeignKey()
         - category.[related_name].all()
 
+    if we know only category title, and we want to have all articles by category:
+    Article.objects.filter(category__[field]="[Title]")
+
   with filters:
     to use some filters/lookups you need to write [fieldName]__[filter]
     read more at https://docs.djangoproject.com/en/5.1/ref/models/querysets/#field-lookups
@@ -47,5 +50,19 @@ exmaple model = Article
     - count = return length of
     - get_previous_by_[datetime field] = return prev object
     - get_next_by_[datetime field] = return next object
+    - distinct = return only uniq objetcs [1, 1, 1, 2, 2] => [1, 2]
+
+Q = In Django, Q is an object provided by django.db.models that allows you to build complex database queries using logical expressions like "OR = |", "AND = &", and "NOT = ~".
+
+example
+Article.objects.filter(Q(pk__in=[1, 5]) | Q(title__contains="test")) = it returns elemens where id equal 1, 5 and title with test => [1, 5, 'test']
+
+Aggregate functions
+    # in Django are used to perform calculations on groups of data, such as counting records, calculating sums, averages, minimums, maximums, and more
+    # existed Aggregate: (Min, Max, Sum, Avg, Count) detailed at: https://docs.djangoproject.com/en/5.1/topics/db/aggregation/
+    # you can also use diff to get differences beetwen
+    - diff=Max('views') - Min('views')
+    - Article.objects.aggregate(min_views=Min('views'), max_views=Max('views')) => {min_views: 0, max_views: 100}
+
 
 
