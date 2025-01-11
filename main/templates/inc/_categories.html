@@ -8,6 +8,7 @@
           class="list-group-item list-group-item-action {% if selected_category.pk == category.pk %} active {% endif %} "
         >
           {{ category.name }}
+          <span class="badge text-bg-warning rounded-pill">{{category.count}}</span>
         </a>
     {% endfor %}
 </div>
