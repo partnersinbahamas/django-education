@@ -65,4 +65,9 @@ Aggregate functions
     - Article.objects.aggregate(min_views=Min('views'), max_views=Max('views')) => {min_views: 0, max_views: 100}
 
 
+Annotate:
+    # In Django, annotate is an ORM method that allows you to add calculated fields (aggregated or non-aggregated) to each object in a QuerySet. This is useful for attaching additional data to each record in a query.
+    - categories = Category.objects.annotate(cnt=Count('product'))
+        for item in categories: item.cnt
+
 
