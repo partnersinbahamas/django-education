@@ -9,6 +9,8 @@ exmaple model = Article
   - order_by('title') = to take data sorted/ordered by title
   - reverse() = to reverse the original data
   - get(pk=1) to take object with has id/pk equal 1
+  - values = used to query the database and returns a list of dictionaries, where the keys are the field names of the model and the values are the corresponding values from the database.
+    * Article.objects.values('id', 'title').all() => [{'id': 1, title: 'Test'}, ...]
 
     if we have:
         - primary model: Category
@@ -53,6 +55,7 @@ exmaple model = Article
     - distinct = return only uniq objetcs [1, 1, 1, 2, 2] => [1, 2]
 
 Q = In Django, Q is an object provided by django.db.models that allows you to build complex database queries using logical expressions like "OR = |", "AND = &", and "NOT = ~".
+F = In Django, the F class is used to reference the value of a field on a model instance directly in database queries. This is especially useful for performing database-level operations, such as comparisons, updates, or expressions, without needing to fetch the object into memory.
 
 example
 Article.objects.filter(Q(pk__in=[1, 5]) | Q(title__contains="test")) = it returns elemens where id equal 1, 5 and title with test => [1, 5, 'test']
@@ -66,7 +69,8 @@ Aggregate functions
 
 
 Annotate:
-    # In Django, annotate is an ORM method that allows you to add calculated fields (aggregated or non-aggregated) to each object in a QuerySet. This is useful for attaching additional data to each record in a query.
+
+    # In Django, annotate is a computed propery ORM method that allows you to add calculated fields (aggregated or non-aggregated) to each object in a QuerySet. This is useful for attaching additional data to each record in a query.
     - categories = Category.objects.annotate(cnt=Count('product'))
         for item in categories: item.cnt
 
