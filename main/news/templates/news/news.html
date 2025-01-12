@@ -36,8 +36,9 @@ News articles
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer article-footer">
                 {{ article.created_at|date:"Y.m.d H:i" }}
+                <span>{{ article.views }} views</span>
             </div>
           </div>
         {% endfor %}

@@ -5,6 +5,7 @@ from .models import Article
 from .templatetags.news_tags import get_all_categories, get_category_published_articles
 from .form import ArticleForm
 from django.views.generic import ListView, DetailView, CreateView
+from django.db.models import F
 
 # ORM
 
@@ -117,6 +118,15 @@ class ArticleView(DetailView):
       def get_context_data(self, **kwargs: Any):
       def get_queryset(self):
     """
+
+    def get_object(self, queryset=None):
+        article = super().get_object(queryset)
+
+        Article.objects.filter(pk=article.pk).update(views=F('views') + 1)
+        article.refresh_from_db(fields=['views'])
+
+        return article
+
 
 # def add_article(request):
 #     if request.method == 'POST':
