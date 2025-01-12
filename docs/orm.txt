@@ -11,6 +11,11 @@ exmaple model = Article
   - get(pk=1) to take object with has id/pk equal 1
   - values = used to query the database and returns a list of dictionaries, where the keys are the field names of the model and the values are the corresponding values from the database.
     * Article.objects.values('id', 'title').all() => [{'id': 1, title: 'Test'}, ...]
+  - raw = to work with Raw SQL queries
+    # in SELECT query musst be an id/pk
+    * Article.objects.raw("SELECT * FROM news_article") => <RawQuerySet: SELECT * FROM news_article>
+    # Raw SQL query with params
+    * Article.objects.raw("SELECT * FROM news_article WHERE title %s", [**titles])
 
     if we have:
         - primary model: Category
@@ -67,11 +72,11 @@ Aggregate functions
     - diff=Max('views') - Min('views')
     - Article.objects.aggregate(min_views=Min('views'), max_views=Max('views')) => {min_views: 0, max_views: 100}
 
-
 Annotate:
-
     # In Django, annotate is a computed propery ORM method that allows you to add calculated fields (aggregated or non-aggregated) to each object in a QuerySet. This is useful for attaching additional data to each record in a query.
     - categories = Category.objects.annotate(cnt=Count('product'))
         for item in categories: item.cnt
+
+
 
 
