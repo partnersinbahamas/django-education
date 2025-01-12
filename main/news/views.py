@@ -32,6 +32,11 @@ class HomeNewsList(ListView):
     template_name = 'news/news.html'
     # a variable name which we use on template: defautl is object_list
     context_object_name = 'news'
+
+    """
+        select relate here if we do not using get_queryset func
+        queryset = Article.objects.select_related('category')
+    """
     
     """
     if we need to add some extra variables to template
@@ -48,8 +53,12 @@ class HomeNewsList(ListView):
         return context
     
     # used to retrieve a set of data that will be passed to the template or used for further processing
+    """
+        select_related method is used to optimize database queries by reducing the number of SQL queries executed when accessing related models. 
+        using with ForeignKey model
+    """
     def get_queryset(self):
-        return Article.objects.filter(is_published=True)
+        return Article.objects.filter(is_published=True).select_related('category')
 
 
 # def by_category(request, pk):
@@ -90,7 +99,7 @@ class NewsByCategory(ListView):
         return context
     
     def get_queryset(self):
-        return get_category_published_articles(category_id=self.kwargs['pk'])
+        return get_category_published_articles(category_id=self.kwargs['pk']).select_related('category')
 
 # def view_article(request, article_id):
 #     article = get_article_by_id(article_id)
