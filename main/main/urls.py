@@ -18,6 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 # urls paths for app
 # include meand that we control paths for main app from main.urls
@@ -31,3 +32,4 @@ urlpatterns = [
 # in production we do not need this, as it will made in production server
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += debug_toolbar_urls()
