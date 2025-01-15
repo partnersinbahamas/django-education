@@ -7,13 +7,15 @@
 {% block main %}
 <div class="container m-0-a mt-2">
   <h1>News {{ page_name }} ({{selected_category.count}}) </h1>
-
+  <p>{{ m_prop }}</p>
   <div class="row">
     <div class="col-md-3">
         {% include 'inc/_categories.html' %}
-        <button class="btn btn-primary mt-3">
-          <a href="{% url 'add_article' %}" class="add_article">New article +</a>
-        </button>
+        {% if request.user.is_authenticated %}
+          <button class="btn btn-primary mt-3">
+            <a href="{% url 'add_article' %}" class="add_article">New article +</a>
+          </button>
+        {% endif %}
     </div>
     <div class="col-md-9 mb-2">
       {% for article in news %}

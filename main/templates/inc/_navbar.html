@@ -14,9 +14,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'news' %}">News</a>
         </li>
-        <li class="nav-item">
-          <a class="btn btn-primary" href="/admin">Administration</a>
-        </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="btn btn-primary" href="/admin">Administration</a>
+          </li>
+        {% endif %}
       </ul>
 
       <span class="m-2">

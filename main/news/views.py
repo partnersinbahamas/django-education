@@ -7,6 +7,7 @@ from .form import ArticleForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from .utils import TitleControl
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # ORM
 
@@ -167,11 +168,18 @@ class ArticleView(DetailView):
 #     return render(request, 'news/add_article.html', data)
     
 # same logic implemantation as def add_article() but with OOP
-class CreateArticle(CreateView):
+# LoginRequiredMixin allow only for authenticaated users
+class CreateArticle(LoginRequiredMixin, CreateView):
     # we need to bind our form with view using form_class
     # as model = Article in ListView, ...
     form_class = ArticleForm
     template_name = 'news/add_article.html'
+
+    # redirec if user not loged
+    login_url = '/admin'
+
+    # throu an 403 Forbidden error if user no logged
+    # raise_exception = True
 
     """
       if we didnt defin a get_absolute_url func
