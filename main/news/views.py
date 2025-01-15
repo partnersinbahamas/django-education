@@ -6,6 +6,7 @@ from .templatetags.news_tags import get_all_categories, get_category_published_a
 from .form import ArticleForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
+from .utils import TitleControl
 
 # ORM
 
@@ -21,7 +22,7 @@ from django.db.models import F
 # ----------
 
 # same logic implemantation as def index() but with OOP
-class HomeNewsList(ListView):
+class HomeNewsList(TitleControl, ListView):
     """
     this will take all Article from Article model
     same as Article.objects.all()
@@ -32,6 +33,7 @@ class HomeNewsList(ListView):
     template_name = 'news/news.html'
     # a variable name which we use on template: defautl is object_list
     context_object_name = 'news'
+    m_prop = 'string in HomeNewsList class'
 
     """
         select relate here if we do not using get_queryset func
@@ -50,6 +52,8 @@ class HomeNewsList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_name'] = 'page'
+        context['m_prop'] = self.get_prop_upper()
+        context['title'] = self.get_upper('News')
         return context
     
     # used to retrieve a set of data that will be passed to the template or used for further processing
@@ -77,7 +81,7 @@ class HomeNewsList(ListView):
 #     return render(request, 'news/news.html', data)
 # ----------
 # same logic implemantation as def by_category() but with OOP
-class NewsByCategory(ListView):
+class NewsByCategory(TitleControl, ListView):
     model = Article
     template_name = 'news/news.html'
     context_object_name = 'news'
@@ -95,6 +99,7 @@ class NewsByCategory(ListView):
 
         context['categories'] = categories
         context['selected_category'] = selected_category
+        context['title'] = self.get_upper(selected_category, fieldName='name')
 
         return context
     
