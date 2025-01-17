@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from .utils import TitleControl
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 # ORM
 
@@ -192,3 +193,17 @@ class CreateArticle(LoginRequiredMixin, CreateView):
       def get_context_data(self, **kwargs: Any):
       def get_queryset(self):
     """
+
+
+# test paginator class with functon
+# def test_pagination(request):
+#     objects = ['object-1', 'object-2', 'object-3', 'object-4', 'object-5', 'object-6', 'object-7', 'object-8',  'object-9']
+#     paginatior = Paginator(objects, 2) # (objects, objects on page)
+#     page = request.GET.get('page', 1)
+#     pages = paginatior.get_page(page)
+
+#     data = {
+#         'page_obj': pages
+#     }
+
+#     return render(request, 'news/test_pagination.html', data)
