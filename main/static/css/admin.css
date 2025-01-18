@@ -1,0 +1,70 @@
+#header {
+    background-color: #7658fe;
+}
+
+#site-name a:link, #site-name a:visited {
+    color: #fff;
+}
+
+#changelist-filter li.selected a {
+    color: #8f76ff !important;
+}
+
+#changelist-filter details > summary::before {
+    color: #8f76ff !important;
+    
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background-color: #7658fe;
+}
+
+a:link, a:visited {
+    color: #8f76ff;
+}
+
+div.breadcrumbs {
+    background-color: #5029ff;
+}
+
+#nav-sidebar .current-model {
+    background-color: #5029ff;
+    color: black;
+
+        a:link, a:visited {
+            color: black;
+            font-weight: bold;
+        }
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background-color: #7658fe;
+
+    &:hover {
+      background-color: #5029ff;
+    }
+
+    &:active {
+      background-color: #5029ff;
+    }
+
+    &:focus {
+      background-color: #5029ff;
+    }
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background-color: #5029ff;
+
+    &:hover {
+      background-color: #5029ff;
+    }
+  
+    &:active {
+      background-color: #5029ff;
+    }
+  
+    &:focus {
+      background-color: #5029ff;
+    }
+}
