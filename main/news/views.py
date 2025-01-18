@@ -24,6 +24,7 @@ from django.core.paginator import Paginator
 # ----------
 
 # same logic implemantation as def index() but with OOP
+# ListView extend Paginator class
 class HomeNewsList(TitleControl, ListView):
     """
     this will take all Article from Article model
@@ -36,6 +37,8 @@ class HomeNewsList(TitleControl, ListView):
     # a variable name which we use on template: defautl is object_list
     context_object_name = 'news'
     m_prop = 'string in HomeNewsList class'
+    # to paginate view list by
+    paginate_by = 2
 
     """
         select relate here if we do not using get_queryset func
@@ -87,6 +90,7 @@ class NewsByCategory(TitleControl, ListView):
     model = Article
     template_name = 'news/news.html'
     context_object_name = 'news'
+    paginate_by = 2
     # """
     # do not allow to show empty list
     # if category id will not found, is raise PageNotFound
