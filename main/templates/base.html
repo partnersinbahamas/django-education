@@ -8,6 +8,7 @@
     <title>{% block title %}Welcome{% endblock %}</title>
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'news/css/news.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
   </head>
   <body>
     {% include 'inc/_navbar.html' %}
@@ -15,7 +16,6 @@
     <main style="height: 90vh">
       {% block main %}
       {% endblock %}
-      {% include 'inc/pagination.html' %}
     </main>
 
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
