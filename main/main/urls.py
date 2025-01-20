@@ -25,7 +25,8 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('news/', include('news.urls'))
+    path('news/', include('news.urls')),
+    path('users/', include('users.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # uses only in development stage, django will build the path, and give us the media files
