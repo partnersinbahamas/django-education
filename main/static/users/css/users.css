@@ -1,0 +1,13 @@
+.log-button {
+    color: #fff;
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.log-button:hover {
+    border-bottom: 1px solid #0d6efd;
+}
