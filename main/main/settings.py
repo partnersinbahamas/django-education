@@ -147,3 +147,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # to buid url to media folder
 MEDIA_URL = '/media/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465 # SSL only
+EMAIL_HOST_USER = 'devsonley@gmail.com'
+EMAIL_HOST_PASSWORD = 'HACH1703'
+EMAIL_USE_SSL = True
+EMAIL_USE_TSL = False

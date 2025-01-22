@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import redirect
-from .forms import UserForm, UserLoginForm
+from .forms import UserForm, UserLoginForm, ContactForm
 from django.contrib.auth import login, logout
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -57,3 +58,33 @@ def user_login(request):
 def user_logout(requset):
     logout(requset)
     return redirect('login')
+
+def user_contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            mail = send_mail(
+              form.cleaned_data['subject'],
+              form.cleaned_data['content'],
+              'devsonley@gmail.com',
+              [request.user.email],
+              fail_silently=True,
+              auth_password="HACH1703"
+            )
+
+            if mail:
+                messages.success(request, 'Mail send successfuly.')
+            else:
+                messages.error(request, 'Email sending failed.')
+        else:
+            messages.error(request, 'Something went wrong.')
+
+    else:
+        form = ContactForm()
+
+    data = {
+        'form': form
+    }
+
+    return render(request, 'users/contact.html', data)
