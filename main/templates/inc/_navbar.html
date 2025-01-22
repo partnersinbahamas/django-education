@@ -20,6 +20,11 @@
             <a class="btn btn-primary" href="/admin">Administration</a>
           </li>
         {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="btn btn-warning" href="{% url 'contact' %}">Contact</a>
+        </li>
+      {% endif %}
       </ul>
 
       <span class="m-2">

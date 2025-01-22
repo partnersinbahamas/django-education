@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact with us
+{% endblock %}
+
+{% block main %}
+<div class="container">
+
+    <div class="row">
+        <h1>Contact</h1>
+
+        <div class="col-md-3">
+            {% include 'inc/_categories.html' %}
+        </div>
+        <div class="col-md-9 mb-2">
+            <div class="news_form">
+                <form action="{% url 'contact' %}" method="post" class="add_form" enctype="multipart/form-data">
+                    {{ form.non_field.errors }}
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-danger mt-3">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
