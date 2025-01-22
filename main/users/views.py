@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import redirect
-from .forms import UserForm
+from .forms import UserForm, UserLoginForm
+from django.contrib.auth import login, logout
 
 # Create your views here.
 
@@ -11,7 +11,9 @@ def register(request):
         form = UserForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            login(request, user)
 
             # to create notification about log
             """
@@ -20,7 +22,7 @@ def register(request):
               .warning, .error, .debug
             """
             messages.success(request, 'Registration success.')
-            return redirect('login')
+            return redirect('news')
         else:
             messages.error(request, 'Registration failed.')
     else:
@@ -31,5 +33,27 @@ def register(request):
     }
     return render(request, 'users/register.html', data)
 
-def login(request):
-    return render(request, 'users/login.html')
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            messages.success(request, 'Login success.')
+            return redirect('news')
+        else:
+            messages.error(request, 'Login failed.')
+    else:
+        form = UserLoginForm()
+
+    data = {
+        'form': form
+    }
+    return render(request, 'users/login.html', data)
+
+
+def user_logout(requset):
+    logout(requset)
+    return redirect('login')
