@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('news/', include('news.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('captcha/', include('captcha.urls') )
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # uses only in development stage, django will build the path, and give us the media files
