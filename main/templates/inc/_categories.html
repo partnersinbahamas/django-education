@@ -1,17 +1,22 @@
 {% load news_tags %}
-<div class="list-group">
-    <!-- using django simple tags -->
-    {% get_all_categories as categories %}
-    {% for category in categories %}
-        <a
-          href="{{ category.get_absolute_url }}"
-          class="list-group-item list-group-item-action {% if selected_category.pk == category.pk %} active {% endif %} "
-        >
-          {{ category.name }}
-          <span class="badge text-bg-warning rounded-pill">{{category.count}}</span>
-        </a>
-    {% endfor %}
-</div>
+{% load cache %}
+
+<!-- use to cache template -->
+{% cache 60 categories %}
+  <div class="list-group">
+      <!-- using django simple tags -->
+      {% get_all_categories as categories %}
+      {% for category in categories %}
+          <a
+            href="{{ category.get_absolute_url }}"
+            class="list-group-item list-group-item-action {% if selected_category.pk == category.pk %} active {% endif %} "
+          >
+            {{ category.name }}
+            <span class="badge text-bg-warning rounded-pill">{{category.count}}</span>
+          </a>
+      {% endfor %}
+  </div>
+{% endcache %}
 
 <!-- using inclusion tag -->
 <!-- {% show_all_categories selected_category %} -->

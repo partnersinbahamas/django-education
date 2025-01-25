@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
+# to cache register page use
+# @cache_page decorator
 def register(request):
     if (request.method == 'POST'):
         form = UserForm(request.POST)

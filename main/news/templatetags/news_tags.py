@@ -3,6 +3,7 @@ from news.models import Category, Article
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.db.models import Count, F
+from django.core.cache import cache
 
 # Django simple tags
 register = template.Library()
@@ -11,7 +12,14 @@ register = template.Library()
 # Simple tag uses to return values
 @register.simple_tag()
 def get_all_categories():
-     return Category.objects.annotate(count=Count('categories', filter=F('categories__is_published'))).filter(count__gt=0)
+    categories = cache.get('categories')
+
+    if not categories:
+        categories = Category.objects.annotate(count=Count('categories', filter=F('categories__is_published'))).filter(count__gt=0)
+
+    cache.set('categories', categories, 60)
+      
+    return categories
 
 # Inclusion tag uses to return values an render the templates
 @register.inclusion_tag('news/list_categories.html')
